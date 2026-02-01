@@ -26,7 +26,7 @@ LESSONS.forEach((lesson, index) => {
   const button = document.createElement("button");
   button.textContent = "Leçon " + (index+1);
   button.onclick = () => setValueToLetterboxes(true, lesson);
-  //button.click();
+  button.click();
 
   lessonBox.appendChild(button)
 });
