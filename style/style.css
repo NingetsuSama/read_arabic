@@ -1,0 +1,192 @@
+:root {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+[lang="ar"] {
+  font-family: "Noto Naskh Arabic", serif;
+}
+
+body {
+  margin: 0;
+  background: #0b0f14;
+  color: #e8eef7;
+}
+
+.wrap {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 16px;
+}
+
+#disclaimer {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #a0a8b8;
+  font-style: italic;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+/* In large screens, Letters and settings in 2 columns */
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .grid > :last-child {
+    grid-column: span 2;
+  }
+}
+
+.card {
+  background: #121a23;
+  border: 1px solid #1f2a37;
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.letter-box {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+h2.box-title {
+  margin-top: 0;
+}
+
+/* ------- Custom checkbox for letters and vowels ------- */
+
+.letter-checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  flex-direction: row !important;
+  user-select: none;
+  gap: 8px;
+  justify-content: center;
+}
+
+.letter-checkbox .letter {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #999;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.letter-checkbox input:checked + .letter {
+  border-color: #ffffff;
+  background-color: #4669b9;
+  color: #fff;
+}
+
+.letter:hover {
+  border-color: #ffffff;
+}
+
+/* Hide the default checkbox */
+.letter-checkbox input {
+  display: none;
+}
+
+/* ------------------------------------------ */
+
+.card-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.card-buttons.mt {
+  margin-top: 15px;
+}
+
+
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+
+input[type="number"] {
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #253244;
+  background: #0e141c;
+  color: #e8eef7;
+}
+
+.buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #2a3a50;
+  background: #162131;
+  color: #e8eef7;
+  cursor: pointer;
+}
+
+button.primary {
+  background: #2b6bff;
+  color: #08101a;
+  font-weight: 600;
+}
+
+.output {
+  margin-top: 10px;
+  padding: 14px;
+  min-height: 140px;
+  border-radius: 14px;
+  background: #0e141c;
+  border: 1px solid #253244;
+
+  direction: rtl;
+  text-align: right;
+  font-size: 28px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.status-msg {
+  font-size: 13px;
+  margin-top: 8px;
+  text-align: center;
+}
+.status-msg.error {
+  color: #ff6a6a;
+}
+.status-msg.success {
+  color: #03ec35;
+}
+

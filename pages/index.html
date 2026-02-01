@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apprendre à lire l'arabe</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../style/style.css">
+
+  <!-- Arabic-friendly fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="wrap">
+
+    <h1>Générateur de mots aléatoires</h1>
+    <p id="disclaimer">
+      Attention, les mots générés ne sont pas des mots réels en arabe, mais des combinaisons aléatoires de lettres pour aider à l'apprentissage de la lecture.
+      <br>
+      <br>
+      Pour l'instant, ça ne fonctionne que pour la leçon 1 ! Le reste est en cours de développement...
+
+    </p>
+    
+    <div class="grid">
+
+
+      <!-- LETTERS + VOWELS -->
+      <div class="card">
+
+        <h2 class="box-title">1) Choisis une leçon</h2>
+        <div id="lessonBox" class="card-buttons"></div>
+
+        <!-- COMING SOON
+         <h2 class="box-title">1) Choisis tes lettres</h2>
+        -->
+
+        <!-- Temporary -->
+        <br><hr><br>
+        <div class="letter-box" id="letterBox" dir="rtl"></div>
+
+        <!-- COMING SOON
+        <h2 class="box-title">2) Choisis tes voyelles</h2>
+        -->
+        <div class="letter-box" id="vowelBox"></div>
+
+        <!-- COMING SOON...
+        <div class="card-buttons">
+          <button id="selectAllLetters">Tout selectionner</button>
+          <button id="clearLetters">Rien selectionner</button>
+        </div>
+        -->
+
+        <!-- Template for a letter or a vowel -->
+        <template id="letterboxTemplate">
+            <label class="letter-checkbox">
+              <input type="checkbox" disabled>
+              <span lang="ar" class="letter"></span>
+            </label>
+        </template>
+
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="card">
+
+        <h2 class="box-title">2) Choisis tes paramètres </h2>
+        <div class="controls">
+          <label>Nombre de mots
+            <input id="count" type="number" value="10" min="1" max="30">
+          </label>
+
+          <label>Mots par ligne
+            <input id="perLine" type="number" value="5" min="1" max="10">
+          </label>
+
+          <label>Taille minimale d'un mot
+            <input id="minLen" type="number" value="4" min="2" max="10">
+          </label>
+
+          <label>Taille maximale d'un mot
+            <input id="maxLen" type="number" value="6" min="2" max="10">
+          </label>
+
+          <!-- COMING SOON
+          <label class="checkbox">
+            <input id="mixedVowels" type="checkbox" checked>
+            Force mixed vowels
+          </label>
+
+          <label class="checkbox">
+            <input id="avoidRepeat" type="checkbox">
+            Avoid repeated letters
+          </label>
+
+          <label class="checkbox">
+            <input id="uniqueWords" type="checkbox">
+            Unique words (best effort)
+          </label>
+          -->
+        </div>
+
+        <div class="card-buttons mt">
+          <button id="generate" class="primary">Générer les mots</button>
+          <button id="copy">Copier les mots</button>
+          <!-- COMING SOON
+           <button id="clear">Effacer les mots</button>
+          -->
+        </div>
+
+        <div id="status-msg" class="status-msg"></div>
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="card">
+        <h2>Output</h2>
+        <div id="output" class="output" lang="ar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script type="module" src="../js/script.js"></script>
+</body>
+</html>
+
