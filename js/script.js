@@ -1,12 +1,13 @@
 // Imports 
 import {LETTERS, VOWELS, LESSONS} from "./data.js"
-import {generateRandomWords} from "./word_generator.js"
+import {findWords, generateRandomWords} from "./word_generator.js"
 
 // Elements 
 const lessonBox = document.getElementById("lessonBox")
 const letterBox = document.getElementById("letterBox");
 const vowelBox  = document.getElementById("vowelBox");
-const output    = document.getElementById("output");
+const realWordOutput = document.getElementById("realWordOutput");
+const randomWordOutput = document.getElementById("randomWordOutput");
 const errorBox  = document.getElementById("status-msg");
 
 // Fill letters and vowels
@@ -25,21 +26,24 @@ Object.entries(VOWELS).forEach(([id, vowel]) => {
 LESSONS.forEach((lesson, index) => {
   const button = document.createElement("button");
   button.textContent = "Leçon " + (index+1);
-  button.onclick = () => setValueToLetterboxes(true, lesson);
-  button.click();
+  button.onclick = () => {setValueToGroup(true, "letters", lesson.letters); setValueToGroup(true, "vowels", lesson.vowels);};
 
   lessonBox.appendChild(button)
 });
 
 // Connect buttons
-/* Coming soon...
 document.getElementById("selectAllLetters").onclick = () => {
-  setValueToLetterboxes(true);
+  setValueToGroup(true, "letters");
 }
 document.getElementById("clearLetters").onclick = () => {
-  setValueToLetterboxes(false);
+  setValueToGroup(false, "letters");
 }
-*/
+document.getElementById("selectAllVowels").onclick = () => {
+  setValueToGroup(true, "vowels");
+}
+document.getElementById("clearVowels").onclick = () => {
+  setValueToGroup(false, "vowels");
+}
 document.getElementById("copy").onclick = async () => {
   try {
     await navigator.clipboard.writeText(output.textContent);
@@ -49,6 +53,10 @@ document.getElementById("copy").onclick = async () => {
     errorBox.className = "status-msg error" 
     errorBox.textContent = "Impossible de copier les mots.";
   }
+}
+document.getElementById("clear").onclick = () => {
+  realWordOutput.textContent = "";
+  randomWordOutput.textContent = "";
 }
 
 // Dynamically adjust the min value of maxLen
@@ -84,10 +92,14 @@ document.getElementById("generate").onclick = () => {
   opts["minLen"] = Number(document.getElementById("minLen").value);
   opts["maxLen"] = Number(document.getElementById("maxLen").value);
 
-  const words = generateRandomWords(selectedLetters, selectedVowels, opts);
+  const words = findWords(selectedLetters, selectedVowels, opts);
+  console.log(words.real);
+  console.log(words.random);
 
-  const per_line = document.getElementById("perLine");
-  output.textContent = words.map((w, i) => (i + 1) % per_line.value === 0 ? w + "\n" : w + "   ").join("");
+  const per_line = Number(document.getElementById("perLine").value);
+  console.log(per_line)
+  realWordOutput.textContent = words.real.map((w, i) => (i + 1) % per_line === 0 ? w + "\n" : w + "   ").join("");
+  randomWordOutput.textContent = words.random.map((w, i) => (words.real.length + i + 1) % per_line === 0 ? w + "\n" : w + "   ").join("");
 
 }
 
@@ -117,23 +129,17 @@ function createLetterCheckbox(id, letter, group) {
 }
 
 /**
- * Sets the checked state of letter and vowel checkboxes based on the provided value and IDs.
+ * Sets the checked state of a checkbox group based on the provided value and IDs.
  *
  * @param {boolean} value - The value to set for the checkboxes (true for checked, false for unchecked).
- * @param {Object} [ids={}] - An object containing arrays of IDs for letters and vowels.
- *                            Structure: { letters: [id1, id2, ...], vowels: [id1, id2, ...] }
- *                            If ids is empty, the value is applied to all checkboxes.
+ * @param {string} group - The data-group attribute value to identify the checkbox group (e.g., "letters" or "vowels").
+ * @param {Object} [ids=[]] - An object containing arrays of IDs.
+ *                            If ids is empty, the value is applied to all checkboxes of the group.
  */
-function setValueToLetterboxes(value, ids = {}) {
-  // Set checked value to all letters
-  document.querySelectorAll("[data-group=letters]").forEach(letter => {
-    letter.checked = Object.keys(ids).length === 0 || ids.letters.includes(letter.id) ? value : !value;
-  });
-
-  // Set checked value to all vowels
-  document.querySelectorAll("[data-group=vowels]").forEach(vowel => {
-    vowel.checked = Object.keys(ids).length === 0 || ids.vowels.includes(vowel.id) ? value : !value;
+function setValueToGroup(value, group, ids = []) {
+  // Set checked value to all checkboxes of the group
+  document.querySelectorAll(`[data-group=${group}]`).forEach(group_item => {
+    group_item.checked = Object.keys(ids).length === 0 || ids.includes(group_item.id) ? value : !value;
   });
 }
-
 

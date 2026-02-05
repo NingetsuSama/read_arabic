@@ -50,3 +50,5 @@ export const VOWELS = {
 export const LESSONS = [
   {letters: ["L_0628", "L_062A", "L_062B", "L_062C", "L_062D", "L_062E", "L_0646"], vowels: ["fatha", "damma", "kasra"]},
 ]
+
+export const WORDS = (await fetch("../words.txt").then(r => r.text())).split(/\r?\n/);

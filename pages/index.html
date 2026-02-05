@@ -16,13 +16,11 @@
 <body>
   <div class="wrap">
 
-    <h1>Générateur de mots aléatoires</h1>
-    <p id="disclaimer">
-      Attention, les mots générés ne sont pas des mots réels en arabe, mais des combinaisons aléatoires de lettres pour aider à l'apprentissage de la lecture.
-      <br>
-      <br>
-      Pour l'instant, ça ne fonctionne que pour la leçon 1 ! Le reste est en cours de développement...
-
+    <h1>Générateur de mots</h1>
+    <p id="information">
+      Cet outil te permet de générer des listes de mots à partir des lettres et des voyelles que tu as apprises. C'est un excellent moyen de pratiquer la lecture et de renforcer ta mémoire des lettres arabes. 
+      Les mots sont des mots tirés du Coran, et dans le cas où il n'y a pas assez de mots correspondant à tes critères, des mots aléatoires sont générés pour compléter.
+      Tu peux choisir les paramètres de génération pour adapter les mots à ton niveau et à tes objectifs d'apprentissage.
     </p>
     
     <div class="grid">
@@ -31,33 +29,28 @@
       <!-- LETTERS + VOWELS -->
       <div class="card">
 
-        <h2 class="box-title">1) Choisis une leçon</h2>
+        <h2 class="box-title">1) Choisis une leçon ou les lettres et voyelles que tu as appris</h2>
         <div id="lessonBox" class="card-buttons"></div>
 
-        <!-- COMING SOON
-         <h2 class="box-title">1) Choisis tes lettres</h2>
-        -->
-
-        <!-- Temporary -->
         <br><hr><br>
         <div class="letter-box" id="letterBox" dir="rtl"></div>
 
-        <!-- COMING SOON
-        <h2 class="box-title">2) Choisis tes voyelles</h2>
-        -->
-        <div class="letter-box" id="vowelBox"></div>
-
-        <!-- COMING SOON...
-        <div class="card-buttons">
+        <div class="select-buttons mb">
           <button id="selectAllLetters">Tout selectionner</button>
           <button id="clearLetters">Rien selectionner</button>
         </div>
-        -->
+
+        <div class="letter-box" id="vowelBox"></div>
+
+        <div class="select-buttons">
+          <button id="selectAllVowels">Tout selectionner</button>
+          <button id="clearVowels">Rien selectionner</button>
+        </div>
 
         <!-- Template for a letter or a vowel -->
         <template id="letterboxTemplate">
             <label class="letter-checkbox">
-              <input type="checkbox" disabled>
+              <input type="checkbox">
               <span lang="ar" class="letter"></span>
             </label>
         </template>
@@ -77,38 +70,20 @@
             <input id="perLine" type="number" value="5" min="1" max="10">
           </label>
 
-          <label>Taille minimale d'un mot
+          <label>Taille minimale d'un mot (aléatoire)
             <input id="minLen" type="number" value="4" min="2" max="10">
           </label>
 
-          <label>Taille maximale d'un mot
+          <label>Taille maximale d'un mot (aléatoire)
             <input id="maxLen" type="number" value="6" min="2" max="10">
           </label>
 
-          <!-- COMING SOON
-          <label class="checkbox">
-            <input id="mixedVowels" type="checkbox" checked>
-            Force mixed vowels
-          </label>
-
-          <label class="checkbox">
-            <input id="avoidRepeat" type="checkbox">
-            Avoid repeated letters
-          </label>
-
-          <label class="checkbox">
-            <input id="uniqueWords" type="checkbox">
-            Unique words (best effort)
-          </label>
-          -->
         </div>
 
         <div class="card-buttons mt">
           <button id="generate" class="primary">Générer les mots</button>
           <button id="copy">Copier les mots</button>
-          <!-- COMING SOON
            <button id="clear">Effacer les mots</button>
-          -->
         </div>
 
         <div id="status-msg" class="status-msg"></div>
@@ -116,8 +91,26 @@
 
       <!-- OUTPUT -->
       <div class="card">
-        <h2>Output</h2>
-        <div id="output" class="output" lang="ar"></div>
+        <h2>3) Lis tes mots</h2>
+
+        <div class="legend" aria-label="Légende des couleurs">
+          <span class="legend_item">
+            <span class="legend_dot legend_dot--green" aria-hidden="true"></span>
+            <span class="legend_label">Mots réels</span>
+          </span>
+
+          <span class="legend_sep" aria-hidden="true">•</span>
+
+          <span class="legend_item">
+            <span class="legend_dot legend_dot--red" aria-hidden="true"></span>
+            <span class="legend_label">Mots aléatoires</span>
+          </span>
+        </div>
+
+        <div class="output" lang="ar">
+          <span id="realWordOutput" class="real-word"></span>
+          <span id="randomWordOutput" class="random-word"></span>
+        </div>
       </div>
     </div>
   </div>
