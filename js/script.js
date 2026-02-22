@@ -22,14 +22,26 @@ Object.entries(VOWELS).forEach(([id, vowel]) => {
   );
 });
 
+
+// All lessons button
+const allLessonsButton = document.createElement("button");
+allLessonsButton.textContent = "Toutes les leçons";
+lessonBox.appendChild(allLessonsButton);
 // Fill lesson presets
+let letters = new Array(); let vowels = new Array();
 LESSONS.forEach((lesson, index) => {
   const button = document.createElement("button");
   button.textContent = "Leçon " + (index+1);
+
+  // Add lesson to All lessons
+  letters.push(...lesson.letters);
+  vowels.push(...lesson.vowels);
+
   button.onclick = () => {setValueToGroup(true, "letters", lesson.letters); setValueToGroup(true, "vowels", lesson.vowels);};
 
   lessonBox.appendChild(button)
 });
+allLessonsButton.onclick = () => {setValueToGroup(true, "letters", letters); setValueToGroup(true, "vowels", vowels);};
 
 // Connect buttons
 document.getElementById("selectAllLetters").onclick = () => {
@@ -46,7 +58,7 @@ document.getElementById("clearVowels").onclick = () => {
 }
 document.getElementById("copy").onclick = async () => {
   try {
-    await navigator.clipboard.writeText(output.textContent);
+    await navigator.clipboard.writeText(realWordOutput.textContent + "\n" + randomWordOutput.textContent);
     errorBox.className = "status-msg success" 
     errorBox.textContent = "Les mots ont bien été copiés.";
   } catch (err) {
@@ -93,11 +105,8 @@ document.getElementById("generate").onclick = () => {
   opts["maxLen"] = Number(document.getElementById("maxLen").value);
 
   const words = findWords(selectedLetters, selectedVowels, opts);
-  console.log(words.real);
-  console.log(words.random);
 
   const per_line = Number(document.getElementById("perLine").value);
-  console.log(per_line)
   realWordOutput.textContent = words.real.map((w, i) => (i + 1) % per_line === 0 ? w + "\n" : w + "   ").join("");
   randomWordOutput.textContent = words.random.map((w, i) => (words.real.length + i + 1) % per_line === 0 ? w + "\n" : w + "   ").join("");
 
