@@ -48,6 +48,11 @@ export function findWords(letters, vowels, opts) {
     let n_found = 0, found_words = [];
 
     for (const word of WORDS) {
+            
+            // Remove words with Al for now
+            if (word.includes("ال") || word.startsWith("ا")) {
+                continue;
+            }
 
             // Check the difference between the letter set of the word and the match set
             const wordSet = new Set(word);
