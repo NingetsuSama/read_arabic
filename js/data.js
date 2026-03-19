@@ -1,5 +1,5 @@
 export const LETTERS = {
-  "L_0627": "ا",
+  //"L_0627": "ا",
   "L_0628": "ب",
   "L_062A": "ت",
   "L_062B": "ث",
@@ -50,6 +50,7 @@ export const VOWELS = {
 export const LESSONS = [
   {letters: ["L_0628", "L_062A", "L_062B", "L_062C", "L_062D", "L_062E", "L_0646"], vowels: ["fatha", "damma", "kasra", "soukoune"]},
   {letters: ["L_0633", "L_0634", "L_0641", "L_0642", "L_0643", "L_0644", "L_0645"], vowels: ["fatha", "damma", "kasra", "soukoune", "shadda"]},
+  {letters: ["L_062F", "L_0630", "L_0631", "L_0632", "L_0648", "L_064A"], vowels: ["fatha", "damma", "kasra", "soukoune", "shadda", "alif", "ya", "waw"]},
 ]
 
 export const WORDS = (await fetch("../words.txt").then(r => r.text())).split(/\r?\n/);
